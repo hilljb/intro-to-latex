@@ -1,0 +1,103 @@
+
+\documentclass{article}
+\usepackage{fullpage,amsfonts,amsmath,amssymb,mathrsfs}
+
+%\setlength\parindent{0pt}
+
+
+
+\begin{document}
+
+\begin{center}
+	\textsc{\Large Installing \LaTeX}
+\end{center}
+
+
+\tableofcontents
+
+
+\section{Introduction}
+
+The following is a set of instructions for installing a LaTeX environment on your personal computer. What is LaTeX? It is a language (not a program) for typesetting technical documents. LaTeX is based on the idea that authors should be able to focus on the content of what they are writing without being distracted by its visual presentation. In short, you give LaTeX the content and it decides how to make that content look presentable. LaTeX is the standard for academic submissions to technical, math and science oriented journals. While it is also possible to typeset mathematics via plug-ins to Microsoft Office or OpenOffice, LaTeX provides a much larger toolbox for organizing and presenting mathematics.\footnote{For instance, LaTeX can automatically number and track references to theorems, lemmas, bibliographical sources, footnotes, etc., making it an ideal environment for writing books and theses. Plus, even Office and OpenOffice use a less advanced LaTeX backend to display their mathematical notation.}
+
+\bigbreak
+LaTeX should be viewed in two parts: backend and frontend. The LaTeX backend is a collection of scripts and programs that are installed on your computer that you never need to worry about, as you rarely access them directly. The frontend, where you edit your LaTeX scripts, communicates with the backend and creates your documents. In certain operating systems the backend is often installed automatically with the installation of a frontend. In Windows, the backend and frontend installation is separate. There are numerous options in all cases, and the main point of this document is to assist you in selecting and installing a backend/frontend LaTeX distribution for your computer.
+
+
+\section{Installing LaTeX on Mac OS X}
+
+The most common LaTeX distribution for Mac OS X is currently TeXShop (frontend) and TeX Live (backend), both free programs. Installing TeX Live (backend) on Mac OS X via the MacTeX installer will automatically install TeXShop (frontend). The Tex User Group (TUG), an online community, constructed an install package which installs everything needed to run these programs on Mac OS X in one step.
+
+\bigbreak\textbf{Instructions:}
+
+\begin{enumerate}
+ \item Visit http://www.tug.org/mactex/
+ \item Download and install the contents of the MacTeX.mpkg.zip file. The file is quite large, since LaTeX comes with a large library of packages designed to create documents for different disciplines and format types.
+\end{enumerate}
+
+
+
+\section{Installing LaTeX on Windows}
+
+Installing LaTeX on Windows takes some time. There are several programs (backend, frontend, other) you need to install from various places online in order to get everything working. Plus, there are many different editors (frontends) available for Windows, some free and some not, all having their own strengths. Let's start by installing the backend.
+
+\bigbreak\textbf{Instructions for Installing the MiKTeX Backend}
+
+\begin{enumerate}
+ \item One thing to keep in mind here is that you are about to install a program that you will never access directly. You will install MikTeX on your system, but you'll never actually open or execute any of the MiKTeX files yourself. \textit{This will always be done for you by your editor/frontend.} Think of MiKTeX as a library that your editor/frontend needs to function.
+\item MiKTeX is free and is available at http://www.miktex.org/
+\item Click on the ``download'' link to the left.
+\item Install MiKTeX on your system. It's a good idea here to let MiKTeX decide where it wants to be located on your harddrive. This will make it easier for your editor/frontend to find MiKTeX when it needs to.
+\item After the installer finishes, let MiKTeX sit there and wait. It can't be used for anything until an editor/frontend for LaTeX is installed.
+\end{enumerate}
+
+There is an intermediate step here that I highly recommend. LaTeX can produce PDF documents, which are awesome for printing but not so awesome for when you are writing your LaTeX script. (It can be a pain when you're writing a 20-page document to constantly close and reopen a PDF and search for the page containing your recent modifications.) Thus, in Windows and in Linux, it is more common to wait until the document is finished to create a PDF version. In the meantime, while you are writing your document, it is typically much faster to use DVI files. If you create a DVI file, open it with a DVI viewer, then modify the LaTeX script and recreate the DVI file, your updates should appear automatically in your DVI viewer. This makes writing LaTeX \textbf{MUCH} faster since you can view your changes (and verify that your code contains no errors) much more quickly.
+
+\bigbreak\textbf{Instructions for Installing a DVI Viewer}
+
+\begin{enumerate}
+ \item MiKTeX includes a DVI viewer and, assuming you have gotten this far, it should be installed in your system. It is called YAP (Yet Another Postscript Viewer). It is probably located at \begin{verbatim}C:\texmf\miktex\bin\yap.exe\end{verbatim}
+Keep this location in mind. You will need to tell your editor/frontend where to find it in order to use DVI files.
+\item Another option, one that is recommended if you plan on ever including graphics (graphs, images, etc.) in your LaTeX documents, is GSView. It is available at the following address:
+\begin{verbatim}http://pages.cs.wisc.edu/~ghost/\end{verbatim}
+\end{enumerate}
+
+Now, the last component is the LaTeX editor/frontend. There are several choices here. In all cases, these programs tend to search for MiKTeX during their installation and they are generally ready-to-go once installed. You may have to select several options and tell the program where to find your DVI and/or PDF viewers though. The process varies from editor to editor. We'll recommend three editors, from the most basic/beginner option to the more advanced/professional option.
+
+\bigbreak\textbf{Instructions for Installing a LaTeX Editor}
+
+\begin{enumerate}
+ \item The most basic option is a program called WinEdt. This is a program with a license agreement (\$30 for students) that provides the most basic and clean LaTeX editing environment. It is available at 
+\begin{verbatim}
+ http://www.winedt.com/
+\end{verbatim}
+\item The intermediate option is a free program called LEd (LaTeX Editor). This program is nice if your screen resolution is relatively high ($\ge1280$) as it provides an editing and viewing environment side-by-side. It is available at
+\begin{verbatim}
+ http://www.latexeditor.org/
+\end{verbatim}
+\item The final option, and the one that seems to be preferred by advanced Windows users with some amount of programming experience, is a free program called TeXNicCenter. I prefer this program on Windows because of the high degree of customization that is possible and the keyboard shortcuts that make live TeXing (TeXing during lectures or during talks) possible. It is available at
+\begin{verbatim}
+ http://www.toolscenter.org/
+\end{verbatim}
+
+\end{enumerate}
+
+
+\section{Installing LaTeX on Linux with the KDE or GNOME Desktop}
+
+Using a package manager will make this process incredibly painless. Using Ubuntu/GNOME, my full LaTeX distribution took only about 90 seconds to find, download, install, and begin using. Search in your package manager of choice for ``latex.'' Make sure you install all of the required libraries and supporting files.
+
+\begin{enumerate}
+ \item LyX is not really a LaTeX frontend in the traditional sense and isn't incredibly recommended by those used to writing LaTeX. It fits somewhere between a WYSIWYG and a text editor.
+ \item Kile is a standard option and seems to be the most widely used LaTeX environment in KDE/GNOME. It is written for KDE, but integrates into GNOME well.
+ \item Texmaker is a simpler LaTeX environment, something like WinEdt but more customizable.
+ \item Winefish is a popular GTK+ based LaTeX editor, which was forked from Bluefish.
+\end{enumerate}
+
+
+
+\vspace{4pc}
+\hfill Jason B. Hill
+\smallbreak\hfill University of Colorado -- Boulder
+
+\end{document}

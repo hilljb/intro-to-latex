@@ -1,0 +1,902 @@
+
+\documentclass[letterpaper,twoside,10pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,multicol,color}
+
+
+\usepackage[hmargin=2.5cm,vmargin=2.5cm]{geometry}
+
+\setlength\parindent{0pt}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+
+
+\author{\textsc{Jason B. Hill}\\\textsc{\small University of Colorado -- Boulder}}
+\title{\textsc{An Introduction to Mathematics in {\LaTeXe}}}
+\date{\textsc{\today}}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{center}
+	{\small Currently available at \texttt{http://euclid.colorado.edu/$\sim$hilljb/latex/}}
+\end{center}
+
+
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\setcounter{page}{1}
+
+
+\section{Writing Text}
+
+There are two ``modes'' in \LaTeXe, text-mode and math-mode. When you write a mathematics document in \LaTeXe, you mix these modes. By default, you are in text-mode.
+
+\bigbreak
+Generally, writing text in {\LaTeXe} feels like writing in any basic text editor. There is a lot going on ``behind the scenes'' though. Because {\LaTeXe} is designed to do professional typesetting, it makes your document look professional in ways that you may never have cared to think about. One of the many examples is in {\LaTeXe}'s automatic display of ligatures:
+\[
+	\text{{\Huge {\color{red}fi}re {\color{red}fl}ower}\qquad instead of\qquad {\Huge {\color{red}f\mbox{}i}re {\color{red}f\mbox{}l}ower}}
+\]
+and optional display of the forgotten ``long s'', should you ever have the nece\hspace{-0.2em}\mbox{$\int\hspace{-0.5em}\int$}\hspace{-0.15em}ity to use it.
+
+\subsection{Special Text Characters in {\LaTeX}}
+
+The following characters will not appear as expected in {\LaTeXe} as they do special things. If you wish for these characters to appear as themselves in your document, you must place a backslash before them (all \LaTeXe\ commands start with a backslash), with the exception of the $\backslash$ symbol itself which is written as \verb!$\backslash$!.
+\begin{center}
+\begin{tabular}{rcll}
+	\textbf{Character} & \quad & \textbf{\LaTeXe\ Meaning} & \textbf{How to Write}\\
+	$\#$ & & macro parameter symbol & $\backslash\#$\\
+	$\$$ & & starts/ends inline math-mode & $\backslash\$$\\
+	$\%$ & & comment character & $\backslash\%$\\
+	$\sim$ & & non-breaking space character & \verb!$\sim$!\\
+	$\backslash$ & & command character & \verb!$\backslash$!\\
+	$\_$ & & math subscript character & \verb!$\_$!\\
+	$\{$ & & begin argument delimiter & \verb!$\{$!\\
+	$\}$ & & end argument delimiter & \verb!$\}$!
+\end{tabular}
+\end{center}
+
+Other characters (mainly those not appearing on your keyboard) will have special commands that display them in {\LaTeX}. Much of the time learning {\LaTeX} is spent learning these commands. A good reference (or an editor with a nice collection of selectable characters) is always nice to have.
+
+\subsection{Font Faces}
+
+The following types of fonts are available in text-mode.
+
+\begin{center}
+ \begin{tabular}{rlll}
+	\small\textbf{Command} & \small\textbf{Font} & \small\textbf{Example} & \small\textbf{Result}\\
+  	\small\verb!\text{}! & \small Plain Text (for inside math mode) & \small\verb!\text{Example 1}! & \small\text{Example 1}\\
+	\small\verb!\textsf{}! & \small Sans Serif Font & \small\verb!\textsf{Example 2}! & \small\textsf{Example 2}\\
+	\small\verb!\texttt{}! & \small Typewriter Font & \small\verb!\texttt{Example 3}! & \small\texttt{Example 3}\\
+	\small\verb!\textbf{}! & \small Bold Face Font & \small\verb!\textbf{Example 4}! & \small\textbf{Example 4}\\
+	\small\verb!\textit{}! & \small Italic Font & \small\verb!\textit{Example 5}! & \small\textit{Example 5}\\
+	\small\verb!\textsc{}! & \small Small Caps Font & \small\verb!\textsc{Example 6}! & \small\textsc{Example 6}\\
+ \end{tabular}
+\end{center}
+
+
+\newpage
+\subsection{Font Sizes}
+
+You want to declare font sizes \textit{within an environment} or {\LaTeX} will try to declare them globally since there is no terminating comand for a font size. Putting curly brackets around the text you want to size, or using font size declarations within other commands are ways of accomplishing this. 
+
+\begin{center}
+ \begin{tabular}{rll}
+  \small\textbf{Command} & \small\textbf{Example} & \small\textbf{Result}\\
+\small\verb!\tiny! & \small\verb!{\tiny Example 1}! & {\tiny Example 1}\\
+\small\verb!\scriptsize! & \small\verb!{\scriptsize Example 2}! & {\scriptsize Example 2}\\
+\small\verb!\footnotesize! & \small\verb!{\footnotesize Example 3}! & {\footnotesize Example 3}\\
+\small\verb!\small! & \small\verb!{\small Example 4}! & {\small Example 4}\\
+\small\verb!\normalsize! & \small\verb!{\normalsize Example 5}! & {\normalsize Example 5}\\
+\small\verb!\large! & \small\verb!{\large Example 6}! & {\large Example 6}\\
+\small\verb!\Large! & \small\verb!{\Large Example 7}! & {\Large Example 7}\\
+\small\verb!\huge! & \small\verb!{\huge Example 8}! & {\huge Example 8}\\
+\small\verb!\Huge! & \small\verb!{\Huge Example 9}! & {\Huge Example 9}\\
+ \end{tabular}
+\end{center}
+
+
+
+\subsection{Horizontal Spacing}
+
+Forced spacing can be tricky in {\LaTeXe}. Simply inserting spaces in your code where you want spaces to appear in the finished document won't generally work. Instead, there are commands to insert space. Horizontal space commands can be used in both text and math environments.
+
+\begin{center}
+\begin{tabular}{rll}
+ \small\textbf{Command} & \small\textbf{Example} & \small\textbf{Result} \\
+\small\verb!\quad! & \small\verb!Used to insert \quad four \quad spaces! & \small Used to insert \quad four \quad spaces\\
+\small\verb!\qquad! & \small\verb!Eight\qquad spaces! & Eight\qquad spaces\\
+\small$\sim$ & \small These$\sim$spaces$\sim$won't$\sim$break$\sim$into~a$\sim$new$\sim$line & These~spaces~won't~break~into~a~new~line\\
+\small\verb!\,! & \small Half a space. E.g., \verb!Hold breath for 10\,s.! & \small Hold breath for 10\,s.\\
+\small\verb!\hspace{}! & \small \verb!Insert\hspace{0.5in}half an inch! & \small Insert\hspace{0.5in}half an inch\\
+\small\verb!\hfill! &\small\verb!Insert as much\hfill space as possible! & \small Insert as much\hfill space as possible
+\end{tabular}
+\end{center}
+
+Some notes:
+\begin{itemize}
+\item Writing \verb!\setlength\parindent{0pt}! in the header of your document will stop \LaTeXe\ from indenting. When you want to indent in this situation, use a \verb!\quad! at the beginning of your paragraph.
+\end{itemize}
+
+
+
+\subsection{Vertical Spacing}
+
+Vertical spacing in {\LaTeXe} can also take some practice. Here are some guidelines.
+
+\begin{itemize}
+ \item Writing a \verb!\\! results in a line break. For example: ``\verb!This is a \\ line break!'' produces
+\begin{quote}
+ This is a \\ line break
+\end{quote}
+
+ \item Writing \verb!\newline! forces a new line. For example: ``\verb!This is a \newline new line!'' produces
+\begin{quote}
+ This is a \newline new line
+\end{quote}
+The difference between \verb!\newline! and \verb!\\! is that \verb!\newline! will attempt to justify text when possible, since it creates a new paragraph while \verb!\\! does not.
+
+\item Start a new paragraph by skipping a line in your {\LaTeX} document. Skipping more than one line will have no added effect.
+
+\item You may force vertical space with the \verb!\smallbreak, \medbreak, \bigbreak! commands. Many {\LaTeX} authors will both skip a line and insert a \verb!\bigbreak! at the beginning of a new paragraph.
+
+\item You may force a certain amount of vertical space with the \verb!\vspace{}! command. In text mode, this command must have a line break before it (cannot be written inline). To skip a large amount of space, write something like \verb!\vspace{5in}! or \verb!\vspace{10pc}! 
+\end{itemize}
+
+\subsection{List Environments}
+
+The first example of a list environment is a bulletted list. Such a list starts with the command \verb!\begin{itemize}! and ends with \verb!\end{itemize}!, with each bullet created by the command \verb!\item!.
+
+\begin{multicols}{2}
+{\begin{verbatim}
+\begin{itemize}
+    \item Here is a bullet.
+    \item And another bullet.
+    \begin{itemize}
+        \item Some subbullet.
+        \item And another.
+    \end{itemize}
+    \item And a final bullet.
+\end{itemize}
+\end{verbatim}}
+\begin{itemize}
+	\item Here is a bullet.
+	\item And another bullet.
+	\begin{itemize}
+		\item Some subbullet.
+		\item And another.
+	\end{itemize}
+	\item And a final bullet.
+\end{itemize}
+\end{multicols}
+
+Another popular kind of list is an enumeration.
+
+\begin{multicols}{2}
+{\begin{verbatim}
+\begin{enumerate}
+    \item Here is the first thing.
+    \item Here is the second thing.
+    \begin{enumerate}
+        \item First subthing.
+        \item Second subthing.
+    \end{enumerate}
+    \item Third thing.
+\end{enumerate}
+\end{verbatim}}
+
+\vspace{8pc}
+\begin{enumerate}
+	\item Here is the first thing.
+	\item Here is the second thing.
+	\begin{enumerate}
+		\item First subthing.
+		\item Second subthing.
+	\end{enumerate}
+	\item Third thing.
+\end{enumerate}
+\begin{enumerate}
+	\item Here is the first thing.
+	\item Here is the second thing.
+	\begin{enumerate}
+		\item First subthing.
+		\item Second subthing.
+	\end{enumerate}
+	\item Third thing.
+\end{enumerate}
+\end{multicols}
+
+If you wish to change the numbering, or have it display in a specific way, you can use the following sort of option when declaring an item:
+
+\begin{quote}
+ \verb!\item[\textbf{13:}]!
+\end{quote}
+
+Notice the difference.
+
+\begin{multicols}{2}
+{\small\begin{verbatim}
+\begin{enumerate}
+    \item[\textbf{1.}] Here is the first thing.
+    \item[\textbf{2.}] Here is the second thing.
+    \begin{enumerate}
+        \item[\textbf{2a.}] First subthing.
+        \item[\textbf{2b.}] Second subthing.
+    \end{enumerate}
+    \item[\textbf{3.}] Third thing.
+\end{enumerate}
+\end{verbatim}}
+\begin{enumerate}
+    \item[\textbf{1.}] Here is the first thing.
+    \item[\textbf{2.}] Here is the second thing.
+    \begin{enumerate}
+        \item[\textbf{2a.}] First subthing.
+        \item[\textbf{2b.}] Second subthing.
+    \end{enumerate}
+    \item[\textbf{3.}] Third thing.
+\end{enumerate}
+\end{multicols}
+
+\subsection{Tabular Environments}
+
+Tables can also take some practice in {\LaTeX}. If you want something other than the basic table, look online as there are entire pages that are devoted to table structures in {\LaTeX}. But keep this in mind: Tabular environments are for text and arrays are for math.
+
+\begin{multicols}{2}
+ {\small\begin{verbatim}
+\begin{center}
+    \begin{tabular}{|r|c|l|}
+    \hline
+    \hline
+    \textbf{Col 1} & \textbf{Col 2} & \textbf{Col 3}\\
+    \hline
+    r1c1 & r1c2 & r1c3 \\
+    r2c1 & r2c2 & r2c3 \\
+    \hline
+    \end{tabular}
+\end{center}
+        \end{verbatim}}
+
+
+\begin{center}
+    \begin{tabular}{|r|c|l|}
+    \hline
+    \hline
+    \textbf{Col 1} & \textbf{Col 2} & \textbf{Col 3}\\
+    \hline
+    r1c1 & r1c2 & r1c3 \\
+    r2c1 & r2c2 & r2c3 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\vspace{4pc}~
+\end{multicols}
+
+One of the main things to notice in the tabular environment is the \verb!{|r|c|l|}! option. This tells {\LaTeX} to use three table columns, with text aligned right, center and left respectively. The \verb!|! just says to draw a vertical line. The command \verb!\\! (which is usually a new line command) tells {\LaTeX} that the current row is finished, where rows are separated by the \& symbol.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Math Mode}
+
+There are two modes in which \LaTeXe will write mathematics.
+
+\subsection{Generic Notes on Math Modes}
+
+\begin{itemize}
+ \item To make subscripts, use \verb!_!. For instance, \verb!$x_\alpha$! produces $x_\alpha$.
+\item To make superscripts, use \verb!^!. For instance, \verb!$x^\beta$! produces $x^\beta$.
+\item You can use the two together: \verb!$x_\alpha^\beta$! or \verb!$x^\beta_\alpha$! produces $x^\beta_\alpha$.
+\item If you want to include more than one ``thing'' as a sub/superscript use curly brackets:
+\[
+ \verb!$\mathfrak{A}_{\alpha+\beta}^{\gamma+\delta}$!\qquad\text{produces}\qquad \displaystyle\mathfrak{A}_{\alpha+\beta}^{\gamma+\delta}
+\]
+
+\end{itemize}
+
+
+\subsection{Inline Math Mode}
+
+Inline Math Mode enables you to write math inline so things like $f(x)=x^2+2x-8$ appear within the regular flow of text.
+
+\bigbreak To write inline math, put a \verb!$! on either side of your math. For example, writing \verb!$h(x)=e^x$! produces the inline math text $h(x)=e^x$.
+
+\begin{itemize}
+ \item Many mathematical notations will display in a compact version when written in inline mode. For instance, writing \verb!$\int_0^1\sin x\,dx$! results in $\int_0^1\sin x\,dx$. You may attempt to get around this in certain cases by using \verb!$\displaystyle \int_0^1\sin x\,dx$!. In this case, writing that displays the following: $\displaystyle \int_0^1\sin x\,dx$.
+ \item You may use text within math mode with the \verb!\text{}! command.
+\end{itemize}
+
+\subsection{Block Math Modes}
+
+There are several options here. If you just want to include math in a block (centered on the page, not compact like inline math mode) then the most common option is to write something like the following.
+
+\begin{quote}
+\begin{verbatim}
+\[
+\int_0^1\sin x\,dx
+\]
+\end{verbatim}
+\end{quote}
+
+This produces:
+\[
+\int_0^1\sin x\,dx
+\]
+
+\subsubsection{Equations}
+
+Notice the difference between
+
+\begin{quote}
+\begin{verbatim}
+\begin{equation}
+\cos(x)=\cos(-x),
+\end{equation}
+\end{verbatim}
+\end{quote}
+
+which produces
+
+\begin{equation}
+\cos(x)=\cos(-x),
+\end{equation}
+
+and 
+
+\begin{quote}
+\begin{verbatim}
+\begin{equation*}
+\cos(x)=\cos(-x),
+\end{equation*}
+\end{verbatim}
+\end{quote}
+
+which produces
+
+\begin{equation*}
+\cos(x)=\cos(-x).
+\end{equation*}
+
+The difference is that {\LaTeX} automatically numbers equations in the \verb!equation! environment, while it doesn't number those in the \verb!equation*! environment.
+
+\subsubsection{Aligns}
+
+Some {\LaTeX} authors will recommend the \verb!eqnarray! environment here. Use of that environment is not recommended (it was removed from the {\LaTeX} standard many years ago) as it displays different in various compilers and there is no protection for spacing (equation numbers may be overrun). If you submit your code to a journal, for instance, using the \verb!eqnarray! environment, there is no sure bet that their compiled result will appear as the result on your personal computer.
+
+\bigbreak An example of the \verb!align! environment is as follows:
+
+\begin{quote}
+\begin{verbatim}
+\begin{align*}
+\sum_{k=1}^5(k^2+2) & = (1^2+2)+(2^2+2)+(3^2+2)+(4^2+2)+(5^2+2)\\
+     & = 3+6+11+18+27\\
+     & = 65.
+\end{align*}
+\end{verbatim}
+\end{quote}
+
+This produces the output:
+
+\begin{align*}
+\sum_{k=1}^5(k^2+2) & = (1^2+2)+(2^2+2)+(3^2+2)+(4^2+2)+(5^2+2)\\
+     & = 3+6+11+18+27\\
+     & = 65.
+\end{align*}
+
+
+
+We can make multiple equation aligns per row as follows:
+
+\begin{quote}
+\begin{verbatim}
+\begin{align*}
+    a_{11}  & =  b_{11}    &    a_{12}  & =  b_{12}\\
+    a_{21}  & =  b_{21}    &    a_{22}  & =  b_{22}+c_{22}.
+\end{align*}
+\end{verbatim}
+\end{quote}
+
+\begin{align*}
+a_{11}	& =b_{11}&
+  a_{12}& =b_{12}\\
+a_{21}& =b_{21}&
+  a_{22}& =b_{22}+c_{22}.
+\end{align*}
+
+\newpage
+\subsubsection{Misc. Block Math Environments}
+
+Here, the left will correspond to what we write in {\LaTeX} and the right will be the corresponding displayed result.
+
+\begin{multicols}{2}
+\begin{verbatim}
+\begin{multline*}
+    a+b+c+d+e+f\\
+    +i+j+k+l+m+n
+\end{multline*}
+\end{verbatim}
+
+\begin{multline*}
+    a+b+c+d+e+f\\
+    +i+j+k+l+m+n
+\end{multline*}
+\end{multicols}
+
+
+\begin{multicols}{2}
+\begin{verbatim}
+\begin{gather}
+a_1=b_1+c_1\\
+a_2=b_2+c_2-d_2+e_2
+\end{gather}
+\end{verbatim}
+
+\begin{gather}
+a_1=b_1+c_1\\
+a_2=b_2+c_2-d_2+e_2
+\end{gather}
+\end{multicols}
+
+
+\subsection{More, Largely Random Examples}
+
+Again, the input is on the left. The output is on the right, except where this would create spacing problems, in which cases the input is displayed above the output.
+
+\bigbreak\textbf{Fractions}
+
+\begin{multicols}{2}
+\begin{verbatim}
+\frac{2}{3} 
+\end{verbatim}
+\[
+ \frac{2}{3}
+\]
+\end{multicols}
+
+We can force {\LaTeXe} to not compress fractions. (The numerator and denominator of a fraction are displayed with inline math-mode.) Use \verb!\tfrac{}{}! in text mode and \verb!\dfrac{}{}! in math modes. (You may also use the command \verb!\displaystyle! as in text mode, use it in the numerator and in the denominator.)
+
+\begin{quote}
+ \small{\begin{verbatim}
+\begin{equation*}
+\Re{z} =\frac{n\pi \dfrac{\theta +\psi}{2}}{
+        \left(\dfrac{\theta +\psi}{2}\right)^2 + \left( \dfrac{1}{2}
+        \log \left\lvert\dfrac{B}{A}\right\rvert\right)^2}.
+\end{equation*}
+        \end{verbatim}
+}
+\end{quote}
+
+This outputs:
+
+\begin{equation*}
+\Re{z} =\frac{n\pi \dfrac{\theta +\psi}{2}}{
+        \left(\dfrac{\theta +\psi}{2}\right)^2 + \left( \dfrac{1}{2}
+        \log \left\lvert\dfrac{B}{A}\right\rvert\right)^2}.
+\end{equation*}
+
+
+\bigbreak\textbf{Binomial Expressions}
+
+{\LaTeXe} uses the \verb!\binom! command. See the following examples.
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+	\binom{n}{r}
+\end{verbatim}
+}
+\[
+	\binom{n}{r}
+\]
+
+\end{multicols}
+
+
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+2^k-\binom{k}{1}2^{k-1}+\binom{k}{2}2^{k-2}
+\end{verbatim}}
+\[
+ 2^k-\binom{k}{1}2^{k-1}+\binom{k}{2}2^{k-2}
+\]
+\end{multicols}
+
+\newpage
+\textbf{Continued Fractions}
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\cfrac{1}{\sqrt{2}+
+ \cfrac{1}{\sqrt{2}+
+  \cfrac{1}{\sqrt{2}+\dotsb
+}}}
+\end{verbatim}}
+\[
+\cfrac{1}{\sqrt{2}+
+ \cfrac{1}{\sqrt{2}+
+  \cfrac{1}{\sqrt{2}+\dotsb
+}}}
+\]
+\end{multicols}
+
+\bigbreak\textbf{Limits and Such}
+
+There are several ways to do this.
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\lim_{x\rightarrow+\infty}f(x)=\infty
+\end{verbatim}}
+\[
+\lim_{x\rightarrow+\infty}f(x)=\infty
+\]
+\end{multicols}
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\lim_{x \to +\infty}, \inf_{x > s} \text{ and } \sup_K
+\end{verbatim}}
+\[
+\lim_{x \to +\infty}, \inf_{x > s} \text{ and } \sup_K
+\]
+\end{multicols}
+
+\bigbreak\textbf{Sums}
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\sum_{k=1}^n k^2 = \frac{1}{2} n (n+1).
+\end{verbatim}}
+\[
+\sum_{k=1}^n k^2 = \frac{1}{2} n (n+1).
+\]
+\end{multicols}
+
+\bigbreak\textbf{Integrals}
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\int_0^4 x^2+2x-\frac{1}{2}x\,dx
+\end{verbatim}}
+\[
+\int_0^4 x^2+2x-\frac{1}{2}x\,dx
+\]
+\end{multicols}
+
+Here is a more complicated example. The limits are moved under the integral instead of beside it.
+
+\begin{quote}\small
+\begin{verbatim}
+\int\limits_{x^2 + y^2 \leq R^2} f(x,y)\,dx\,dy
+   = \int_{\theta=0}^{2\pi} \int_{r=0}^R
+      f(r\cos\theta,r\sin\theta) r\,dr\,d\theta
+\end{verbatim}
+\end{quote}
+
+\[
+\int\limits_{x^2 + y^2 \leq R^2} f(x,y)\,dx\,dy
+   = \int_{\theta=0}^{2\pi} \int_{r=0}^R
+      f(r\cos\theta,r\sin\theta) r\,dr\,d\theta
+\]
+
+
+\bigbreak\textbf{Matrices}
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\left(\begin{array}{ccc}
+   a & b & c \\
+   d & e & f \\
+   g & h & i
+\end{array}\right)
+\end{verbatim}}
+\[
+\left(\begin{array}{ccc}
+   a & b & c \\
+   d & e & f \\
+   g & h & i
+\end{array}\right)
+\]
+\end{multicols}
+
+
+\newpage
+\textbf{Certain Characters}
+
+Don't ever use the keyboard keys $<$ or $>$ when you mean to use one of the following
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\langle A \rangle
+\end{verbatim}}
+\[
+\langle A \rangle
+\]
+\end{multicols}
+
+
+\begin{multicols}{2}
+\small{\begin{verbatim}
+\left\langle \frac{A}{B} \right\rangle
+\end{verbatim}}
+\[
+\left\langle \frac{A}{B} \right\rangle
+\]
+\end{multicols}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Document Headers}
+
+The document header for this file looks like the following:
+\begin{quote}{\small\begin{verbatim}
+\documentclass[letterpaper,twoside,10pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,amsthm,multicol,color}
+
+
+\usepackage[hmargin=2.5cm,vmargin=2.5cm]{geometry}
+
+\setlength\parindent{0pt}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+
+
+\author{\textsc{Jason B. Hill}\\\textsc{\small University of Colorado -- Boulder}}
+\title{\textsc{An Introduction to Mathematics in {\LaTeXe}}}
+\date{\textsc{\today}}
+\end{verbatim}}\end{quote}
+
+\subsection{Document Classes}
+
+The first line of a {\LaTeX} file is typically the \verb!\documentclass[options]{class}! argument. This document uses the \texttt{article} class. Almost everything commonly written in mathematics will use this class. Documents written in the \texttt{article} class may contain sections, subsections, subsubsections, paragraphs and subparagraphs. They may not contain parts or chapters. (See Section \ref{divisions}.)
+
+\bigbreak If you intent to print your {\LaTeX} document duplex style (front and back) and bind it, then using the class \texttt{book} will alternate margin sizes left and right to accomodate the extra spacing needed by the binding.
+
+\subsection{Document Class Options}
+
+It's generally a good idea to specify your paper type and font size in the header. Doing this ensures that your audience will view the results of your {\LaTeX} code as you intend. These options are in square brackets, such as \texttt{[letterpaper,10pt]} within the document class declaration.
+
+\begin{center}
+ \begin{tabular}{rl}
+  \small For documents beind viewed/printed in North America: & \small\texttt{[letterpaper]}\\
+  \small For documents beind viewed/printed outside North America: & \small\texttt{[a4paper]}
+ \end{tabular}
+\end{center}
+
+The option \texttt{[letterpaper,10pt]} then makes a US letter sized paper with the standard font being 10pt.
+
+\subsection{Packages}
+
+{\LaTeX} is mostly a giant collection of packages on top of old-school {\TeX}. These packages are really what make {\LaTeX} work. The packages typically used for math are:
+
+\begin{center}
+ \begin{tabular}{rl}
+  \small\texttt{amsfonts} & \small Makes certain math symbols/fonts possible. E.g., $\mathbb{R}$\\
+  \small\texttt{amsmath} & \small Makes most math notation possible. E.g., $\displaystyle \int_1^x\frac{1}{x^2}\,dx$\\
+  \small\texttt{amssymb} & \small Make some symbols possible. E.g., $\blacksquare$
+ \end{tabular}
+\end{center}
+
+The \texttt{fullpage} package will make sure the margins of your page are 1 inch on all sides. The \texttt{geometry} package allows you to define margins at will. Without these options, you'll see that the article class in particular gives much bigger margins. More packages are discussed in this document as they are needed.
+
+\newpage
+\subsection{Document Length Declarations}
+
+You'll notice that the header for this file contains \verb!setlength\parindent{0pt}!. By default, {\LaTeX} indents new paragraphs, which can actually be quite annoying when writing mathematics. The \texttt{parindent} setting in the header in this case resets that length to zero. (You could make it bigger if you wanted to.) Other length declarations that may be useful are as follows.
+
+\begin{center}
+ \begin{tabular}{rl}
+	\small\verb!\parindent! & \small normal paragraph indentation\\
+	\small\verb!\baselineskip! & \small vertical distance between lines in a paragraph\\
+	\small\verb!\parskip! & \small extra vertical space between paragraphs
+ \end{tabular}
+\end{center}
+
+\subsection{New Commands and Renew Commands}\label{newcommand}
+Defining new commands and renewing standard commands can make your code writing more efficient. For instance, typically to write a $\mathbb{R}$ symbol in {\LaTeX} one would write \verb!\mathbb{R}! in math mode (more on math mode later). We can make this more efficient.
+
+\begin{quote}
+ \verb!\newcommand{\mbr}{\mathbb{R}}!
+\end{quote}
+
+With the above line in the document (preferably in the header, but almost anywhere will do, just keep in mind that the command can only be used below where it is defined in the code), we would only need to type \verb!\mbr! in math mode to achieve the same symbol. The idea is as follows: whenever an instance of the content inside the first brackets is found in your {\LaTeX} document, it is replaced with the content in the second set of brackets and then compiled. The following example takes this a step further.
+
+\begin{quote}
+ \verb!\newcommand{\mbr}[1]{\mathbb{#1}}!
+\end{quote}
+
+\newcommand{\mbr}[1]{\mathbb{#1}}
+
+Here, \texttt{[1]} is an argument that we send to the command \verb!\mbr! and in turn we get the output \verb!\mathbb{1}!. For example, if we type \verb!\mbr{Q}! in math mode, it will display $\mbr{Q}$. It is also possible to renew commands so that they do something different than their current definition. For example, writing
+
+\begin{quote}
+ \verb!\renewcommand{\mathbb}[1]{\mathf[thm]rak{#1}}!
+\end{quote}
+
+will force \verb!\mathbb{C}! to display as $\mathfrak{C}$ (a fraktur letter) instead of $\mathbb{C}$ (a blackboard letter).
+
+
+
+\section{Document Organization}\label{divisions}
+
+{\small\verb!\section{Document Organization}\label{divisions}!}
+
+\medbreak
+{\small\verb!This is Section \ref{divisions}, although the number ``\ref{divisions}'' doesn't appear...!} results in the beginning of the following paragraph.
+
+\bigbreak This is Section \ref{divisions}, although the number ``\ref{divisions}'' doesn't appear anywhere in the code for this sentence. {\LaTeX} automatically numbers many constructs (pages, sections, subsections, chapters, theorems, lemmas, etc.) and has a special environment for labelling and referencing such constructs. This is very convenient, since you can move constructs around (e.g., change the order of theorems) and {\LaTeXe} will automatically change any references. First, we will look at some of these constructs. Then, we will see how to assign labels and references.
+
+\subsection[Parts, Chapters \& Sections]{Parts, Chapters and Sections}\label{parts}
+
+A part may include several chapters, a chapter may include several sections, each section may include several subsections, and so on. We can begin a new section (or whatever) by writing
+
+\begin{quote}
+ \verb!\section{Put Section Title Here}!
+\end{quote}
+
+\newpage
+The constructs available in {\LaTeXe} for this sort of organization are as follows. (We will discuss them in a little more detail in the coming subsections.)
+
+\begin{center}
+ \begin{tabular}{rl}
+  \small\verb!\part{title}! & \small Can only be used in certain document classes. (Not in \texttt{article}.)\\
+  \small\verb!\chapter{title}! & \small Can only be used in certain document classes. (Not in \texttt{article}.)\\
+  \small\verb!\section{title}! & \small Automatically numbered 1, 2, 3, ...\\
+  \small\verb!\subsection{title}! & \small When in Section 3, automatically numbered 3.1, 3.2, 3.3, ...\\
+  \small\verb!\subsubsection{title}! & \small When in Subsection 4.3, automatically numbered 4.3.1, 4.3.2, ...\\
+ \end{tabular}
+\end{center}
+
+
+
+\subsection{Table of Contents}
+
+Once you have defined sections and subsections, using the following command (preferably at the beginning of your document) will result in a table of contents where {\LaTeXe} will insert the document structures, substructures and page numbers automatically.
+
+\begin{quote}
+ \verb!\tableofcontents!
+\end{quote}
+
+You can force part/chapter/section/subsection/subsubsection names to appear differently in the Table of Contents than they appear in headings by using the following modification:
+
+\begin{quote}
+ \verb!\subsection[Parts, Chapters \& Sections]{Parts, Chapters and Sections}!
+\end{quote}
+
+Notice that in the current document, Subsection \ref{parts} has the title \texttt{Parts, Chapters \& Sections} in the Table of Contents, yet has the title \texttt{Parts, Chapters and Sections} in the subsection heading. (The backslash is placed in front of the \& because \& is a special character in {\LaTeX} and placing a backslash in front of it tells {\LaTeX} to actually display a \&.)
+
+\subsection{Theorems, Corollaries and Lemmas}
+
+Like Sections and other constructs, {\LaTeX} can automatically number Theorems and such. We need to do a little work first to tell {\LaTeX} explicitly how to number the theorems and how to display the content of the theorems. {\LaTeX} thinks of five constructs here: theorems, corollaries, lemmas, definitions and remarks. Mathematical texts typically write the first three of these in italics, and the latter two in a regular font. Following that convention, the following should be placed in the document header.
+
+\begin{quote}
+\begin{verbatim}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\end{verbatim}
+\end{quote}
+
+This is somewhat complex, but it tells {\LaTeX} to order theorems by Section (so the third theorem in Section 2 will be Theorem 2.3) and to order corollaries and lemmas with the same ordering as theorems (so the first corollary in Section 5 will be Corollary 5.7 if it comes after Theorem 5.6). Removing the \texttt{[section]} declaration will order all theorems, corollaries and lemmas linearly throughout the entire document (the third such theorem/corollary/lemma in the document will be numbered 3 regardless of which section in which it appears). The \texttt{[thm]} declaration in the Corollary and Lemma definitions just tell {\LaTeX} to tie the numbering of Corollaries and Lemmas to the numbering of Theorems. If you remove this declaration, it would be possible to have Lemma 1 appear after Theorem 32, for instance.
+
+\bigbreak For proofs, use the \verb!\begin{proof}! and \verb!\end{proof}! environments (these require the \texttt{amsthm} package). {\LaTeX} will automatically place a square at the end of the proof. If you want to use a different symbol, renew (Section \ref{newcommand}) the command \verb!\qedsymbol!.
+
+\newpage
+The following is an example that demonstrates this. Notice that we are currently in Section \ref{divisions} of the current document, and so we expect the first theorem/corollary/lemma to be numbered 2.1. Here is what we type:
+
+\begin{quote}
+ \begin{verbatim}
+\begin{thm}
+	This is a theorem.
+\end{thm}
+
+\begin{proof}
+	This is the proof. Notice the box thing at the end.
+\end{proof}
+
+\begin{cor}
+	Here is a corollary.
+\end{cor}
+
+\begin{lem}
+	And a lemma.
+\end{lem}
+
+\begin{thm}[Some Famous Name]
+ And another theorem.
+\end{thm}
+ \end{verbatim}
+\end{quote}
+
+That will display the following.
+
+\begin{thm}
+ This is a theorem.
+\end{thm}
+
+\begin{proof}
+ This is the proof. Notice the box thing at the end.
+\end{proof}
+
+\begin{cor}
+ Here is a corollary.
+\end{cor}
+
+\begin{lem}
+ And a lemma.
+\end{lem}
+
+\begin{thm}[Some Famous Name]
+ And another theorem.
+\end{thm}
+
+\newpage
+\subsection{Labels and References}
+
+For items in {\LaTeX} which contain some sort of number, we can assign a label to that number and reference it throughout the document. To place a label, use the \verb!\label{labelname}! command. To reference the labelled item, use the \verb!\ref{labelname}! command. For example, if we wish to reference a theorem through the text of a document, the following will accomplish that.
+
+\begin{quote}
+ \begin{verbatim}
+\begin{thm}\label{importanttheorem}
+	This is a very important theorem.
+\end{thm}
+
+We can reference Theorem \ref{importanttheorem} like so.
+ \end{verbatim}
+\end{quote}
+
+
+That will display the following:
+
+\begin{quote}
+\begin{thm}\label{importanttheorem}
+ This is a very important theorem.
+\end{thm}
+
+We can reference Theorem \ref{importanttheorem} like so.
+\end{quote}
+
+{\LaTeX} will automatically number many equations and other items as well. Since there are so many things that may be numbered, it is generally a standard practice to label things so that the label gives some information about the item it labels. For instance, a label of \verb!\label{thm:HeineBorel}! would be used on a theorem (thm) named Heine Borel and a label of \verb!\label{eqn:myequation}! could be used on an equation (eqn). 
+
+
+
+
+
+
+\end{document}
